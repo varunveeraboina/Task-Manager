@@ -1,0 +1,3 @@
+export const CREATE_NEW_BOARD = 'CREATE_NEW_BOARD';
+export const ADD_NEW_TASK = 'ADD_NEW_TASK';
+export const EDIT_TASK_STATUS = 'EDIT_TASK_STATUS';
