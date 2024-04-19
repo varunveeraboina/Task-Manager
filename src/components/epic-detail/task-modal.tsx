@@ -1,9 +1,23 @@
 import { useState } from 'react';
-import { editTaskStatus } from '@/reducers/module1/action';
+import { editTaskStatus } from '@/redux/action';
 import { useSearchParams } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
-const Modal = ({ isOpen, closeModal, taskName, taskStatus, taskKey }) => {
+interface ModalProps {
+  isOpen: boolean;
+  closeModal: () => void;
+  taskName: string;
+  taskStatus: string;
+  taskKey: string;
+}
+
+const Modal = ({
+  isOpen,
+  closeModal,
+  taskName,
+  taskStatus,
+  taskKey,
+}: ModalProps) => {
   console.log('taskStatus', taskStatus);
   const [formData, setFormData] = useState({
     label: taskName,
@@ -30,7 +44,7 @@ const Modal = ({ isOpen, closeModal, taskName, taskStatus, taskKey }) => {
       setShouldShowError(false);
       dispatch(
         editTaskStatus(
-          selectedBoard,
+          selectedBoard || '',
           taskKey,
           formData.label,
           taskStatus,

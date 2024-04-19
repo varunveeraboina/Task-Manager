@@ -1,6 +1,6 @@
 import React from 'react';
 import TaskItem from './task-item';
-import styled from 'styled-components';
+import { Task } from '@/redux/types';
 
 type STATUS = 'todo' | 'doing' | 'complete';
 export default function StatusColumn({
@@ -8,10 +8,7 @@ export default function StatusColumn({
   tasks,
 }: {
   status: STATUS;
-  tasks: {
-    key: string;
-    label: string;
-  };
+  tasks: Array<Task>;
 }) {
   return (
     <div className="flex-1 px-8 mt-4">
@@ -19,7 +16,7 @@ export default function StatusColumn({
       {tasks.map((task) => {
         return (
           <TaskItem
-            key={task.key}
+            key={'task-item=' + task.key}
             taskKey={task.key}
             label={task.label}
             status={status}

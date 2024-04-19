@@ -1,9 +1,15 @@
 import { useState } from 'react';
-import { createNewTask } from '@/reducers/module1/action';
+import { createNewTask } from '@/redux/action';
 import { useSearchParams } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
-const Modal = ({ isOpen, closeModal }) => {
+const Modal = ({
+  isOpen,
+  closeModal,
+}: {
+  isOpen: boolean;
+  closeModal: () => void;
+}) => {
   const [formData, setFormData] = useState({
     label: '',
     status: '',

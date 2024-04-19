@@ -1,21 +1,5 @@
-import { Action } from '@/reducers/types';
 import { CREATE_NEW_BOARD, ADD_NEW_TASK, EDIT_TASK_STATUS } from './constant';
-type Task = {
-  key: string;
-  label: string;
-};
-
-type Board = {
-  key: string;
-  label: string;
-  todo: Task[];
-  doing: Task[];
-  complete: Task[];
-};
-
-type State = {
-  boards: Board[];
-};
+import { State, Action } from './types';
 
 const initialState: State = {
   boards: [
@@ -78,7 +62,7 @@ const initialState: State = {
   ],
 };
 
-export const myReducer1 = (state = initialState, action: Action) => {
+const reducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case CREATE_NEW_BOARD: {
       const generatedBoardKey = action.payload.name
@@ -150,3 +134,5 @@ export const myReducer1 = (state = initialState, action: Action) => {
       return state;
   }
 };
+
+export default reducer;

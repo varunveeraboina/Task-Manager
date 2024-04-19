@@ -7,6 +7,12 @@ import Button from './button';
 import { useSelector } from 'react-redux';
 import CreateBoardModal from './create-board-modal';
 import { useSearchParams } from 'next/navigation';
+import { Board } from '@/redux/types';
+
+interface BoardItem {
+  key: string;
+  label: string;
+}
 
 const LeftNavContainer = styled.div`
   background-color: #3730a3;
@@ -17,10 +23,10 @@ const LeftNavContainer = styled.div`
 
 export default function LeftNav() {
   const searchParams = useSearchParams();
-  const [isModalOpen, setIsModalOpen] = useState();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const selectedBoard = searchParams.get('selectedBoard');
   const boards = useSelector((state) => {
-    return state.boards.reduce((acc, current) => {
+    return state.boards.reduce((acc: Array<BoardItem>, current: Board) => {
       return [...acc, { key: current.key, label: current.label }];
     }, []);
   });
@@ -29,28 +35,16 @@ export default function LeftNav() {
 
   return (
     <LeftNavContainer>
-      {/* <Image
-        src="https://fonts.gstatic.com/s/i/materialicons/google/v22/24px.svg?download=true
-"
-        // style={{ width: 48, height: 48 }}
-        width={48}
-        height={48}
-        alt="Company Icon"
-      /> */}
       <div className="pl-4 text-lg font-bold tracking-wide text-white">
         Kanban
       </div>
       <div className="mt-16 pl-4 text-sm font-thin tracking-widest text-gray-200">
         ALL BOARDS ({boards.length})
       </div>
-      {/* <Button title={board} />
-      <Button title="Marketing Plan" />
-      <Button title="Road Map" /> */}
-      {boards.map((item) => {
+      {boards.map((item: Board) => {
         return (
           <Button
             active={selectedBoard === item.key}
-            // active={true}
             title={item.label}
             key={item.key}
             id={item.key}

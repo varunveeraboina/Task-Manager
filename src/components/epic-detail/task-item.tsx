@@ -19,6 +19,7 @@ export default function TaskItem({
 }: {
   label: string;
   status: String;
+  taskKey: string;
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 

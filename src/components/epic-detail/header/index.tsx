@@ -4,6 +4,7 @@ import Button from './button';
 import { useSelector } from 'react-redux';
 import { useSearchParams } from 'next/navigation';
 import Modal from './add-task-modal';
+import { State } from '@/redux/types';
 
 const HeaderWrapper = styled.div`
   height: 100px;
@@ -17,7 +18,7 @@ const HeaderWrapper = styled.div`
 export default function Header() {
   const searchParams = useSearchParams();
   const selectedBoard = searchParams.get('selectedBoard');
-  const currentBoardName = useSelector((state) => {
+  const currentBoardName = useSelector((state: State) => {
     return (
       state.boards.find((board) => board.key === selectedBoard)?.label || ''
     );

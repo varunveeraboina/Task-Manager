@@ -1,13 +1,25 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createNewBoard } from '@/reducers/module1/action';
+import { createNewBoard } from '@/redux/action';
+import { State, Board } from '@/redux/types';
 
-const Modal = ({ isOpen, closeModal }) => {
+interface BoardItem {
+  key: string;
+  label: string;
+}
+
+const Modal = ({
+  isOpen,
+  closeModal,
+}: {
+  isOpen: boolean;
+  closeModal: () => void;
+}) => {
   const [boardName, setBoardName] = useState('');
   const [shouldShowError, setShouldShowError] = useState(false);
   const dispatch = useDispatch();
-  const boards = useSelector((state) => {
-    return state.boards.reduce((acc, current) => {
+  const boards = useSelector((state: State) => {
+    return state.boards.reduce((acc: Array<BoardItem>, current: Board) => {
       return [...acc, { key: current.key, label: current.label }];
     }, []);
   });
